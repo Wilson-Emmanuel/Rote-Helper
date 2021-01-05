@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+  <tabs>
+    <Tab fx:id="playTab" text="Play">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="395.0" prefWidth="600.0">
+               <children>
+                  <ComboBox fx:id="playGroupsCmb" layoutX="156.0" layoutY="52.0" prefHeight="25.0" prefWidth="393.0" />
+                  <Label layoutX="92.0" layoutY="51.0" prefHeight="19.0" prefWidth="64.0" text="Group">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                  </Label>
+                  <Accordion fx:id="settingsAcd" layoutX="98.0" layoutY="100.0" prefHeight="75.0" prefWidth="453.0">
+                    <panes>
+                      <TitledPane fx:id="settingsPane" animated="false" prefHeight="135.0" prefWidth="474.0" text="Settings" />
+                    </panes>
+                  </Accordion>
+                  <Button fx:id="playBtn" layoutX="513.0" layoutY="332.0" mnemonicParsing="false" text="Play" />
+               </children></AnchorPane>
+      </content>
+    </Tab>
+    <Tab fx:id="createTab" text="Create">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <ComboBox fx:id="createGroupsCmb" layoutX="135.0" layoutY="121.0" prefHeight="25.0" prefWidth="393.0" />
+                  <Label layoutX="61.0" layoutY="120.0" prefHeight="19.0" prefWidth="64.0" text="Groups">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="55.0" layoutY="39.0" text="Group Name" />
+                  <TextField id="newGroupTxt" fx:id="newGroupTxt" layoutX="135.0" layoutY="35.0" prefHeight="25.0" prefWidth="396.0" />
+                  <Button fx:id="newGroupBtn" layoutX="453.0" layoutY="76.0" mnemonicParsing="false" text="New Group" />
+                  <Label layoutX="55.0" layoutY="177.0" text="Kanji" />
+                  <TextField fx:id="newKanjiTxt" layoutX="135.0" layoutY="173.0" prefHeight="25.0" prefWidth="396.0" />
+                  <Label layoutX="55.0" layoutY="214.0" text="Hiragana" />
+                  <TextField fx:id="newHiraganaTxt" layoutX="135.0" layoutY="210.0" prefHeight="25.0" prefWidth="396.0" />
+                  <TextField fx:id="newRomajiTxt" layoutX="135.0" layoutY="253.0" prefHeight="25.0" prefWidth="396.0" />
+                  <Label layoutX="61.0" layoutY="257.0" text="Romaji" />
+                  <TextField fx:id="newEnglishTxt" layoutX="135.0" layoutY="292.0" prefHeight="25.0" prefWidth="396.0" />
+                  <Label layoutX="61.0" layoutY="296.0" text="English" />
+                  <Button fx:id="newEntryBtn" layoutX="453.0" layoutY="323.0" mnemonicParsing="false" text="New Entry" />
+               </children></AnchorPane>
+      </content>
+    </Tab>
+      <Tab fx:id="manageTab" text="Manage">
+        <content>
+          <AnchorPane fx:id="manageApn" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+        </content>
+      </Tab>
+  </tabs>
+</TabPane>

@@ -1,0 +1,7 @@
+.tab-label {
+    -fx-content-display: top;
+}
+.tab-pane {
+    -fx-tab-min-height: 70;
+    -fx-tab-max-height: 70;
+}

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="401.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="18.0" layoutY="112.0" text="Wait Time (seconds)" />
+      <TextField fx:id="waitTimeTxt" layoutX="141.0" layoutY="108.0" prefHeight="25.0" prefWidth="241.0" />
+      <Label layoutX="24.0" layoutY="14.0" text="Content">
+         <font>
+            <Font name="System Bold Italic" size="16.0" />
+         </font>
+      </Label>
+      <CheckBox fx:id="kanjiCbn" layoutX="24.0" layoutY="48.0" mnemonicParsing="false" text="Kanji" />
+      <CheckBox fx:id="hiraganaCbn" layoutX="113.0" layoutY="48.0" mnemonicParsing="false" text="Hiragana" />
+      <CheckBox fx:id="romajiCbn" layoutX="224.0" layoutY="48.0" mnemonicParsing="false" text="Romaji" />
+      <CheckBox fx:id="englishCbn" layoutX="318.0" layoutY="48.0" mnemonicParsing="false" text="English" />
+      <Label layoutX="19.0" layoutY="75.0" text="Animation">
+         <font>
+            <Font name="System Bold Italic" size="16.0" />
+         </font>
+      </Label>
+      <RadioButton fx:id="infiniteRbn" layoutX="19.0" layoutY="146.0" mnemonicParsing="false" text="Infinite" />
+      <RadioButton fx:id="finiteRbn" layoutX="97.0" layoutY="146.0" mnemonicParsing="false" text="Finite" />
+      <Label layoutX="166.0" layoutY="146.0" text="Repeat Count" />
+      <TextField fx:id="repeatCountTxt" layoutX="253.0" layoutY="142.0" prefHeight="25.0" prefWidth="130.0" />
+      <CheckBox fx:id="randomCbn" layoutX="21.0" layoutY="174.0" mnemonicParsing="false" text="Random" />
+      <CheckBox fx:id="animateCbn" layoutX="108.0" layoutY="79.0" mnemonicParsing="false" />
+   </children>
+</AnchorPane>
