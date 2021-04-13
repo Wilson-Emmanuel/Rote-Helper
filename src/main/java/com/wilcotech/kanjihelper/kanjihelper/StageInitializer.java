@@ -43,6 +43,7 @@ public class StageInitializer implements ApplicationListener<RoteHelperUIStarter
             FXMLLoader fxmlLoader = new FXMLLoader(mainResource.getURL());
             fxmlLoader.setController(mainController);
             Parent parent = fxmlLoader.load();
+            parent.getStyleClass().add("mainbg");
 
             mainStage = stageReadyEvent.getStage();
 

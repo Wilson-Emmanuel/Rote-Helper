@@ -1,5 +1,8 @@
+.mainbg{
+    -fx-background-color: #BCD3E7;
+}
 .button{
-    -fx-background-color: #152238;
+    -fx-background-color: #32527b;
     -fx-text-fill: #ffffab;
 }
 .trans{
