@@ -22,7 +22,7 @@ public class SettingsComponent extends AnchorPane {
         super();
         settingsController = new SettingsController();
         try{
-            //Load UI
+            //Load  UI
             FXMLLoader loader = new FXMLLoader(ResourceUtils.getURL("classpath:settings.fxml"));
             loader.setController(settingsController);
             Node settingsNode = loader.load();
