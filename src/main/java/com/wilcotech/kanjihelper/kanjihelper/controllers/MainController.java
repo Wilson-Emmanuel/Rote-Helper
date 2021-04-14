@@ -1,7 +1,6 @@
 package com.wilcotech.kanjihelper.kanjihelper.controllers;
 
 import com.wilcotech.kanjihelper.kanjihelper.custom_components.DialogComponent;
-import com.wilcotech.kanjihelper.kanjihelper.custom_components.ManageTabComponent;
 import com.wilcotech.kanjihelper.kanjihelper.custom_components.SettingsComponent;
 import com.wilcotech.kanjihelper.kanjihelper.domain.models.Entry;
 import com.wilcotech.kanjihelper.kanjihelper.domain.models.Group;
@@ -17,7 +16,6 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,74 +32,85 @@ import java.util.ResourceBundle;
 @Controller
 public class MainController implements Initializable {
 
-    @FXML public Tab playTab;
-    @FXML public Tab createTab;
-    @FXML public Tab manageTab;
+    @FXML
+    private Tab playTab;
+    @FXML
+    private Tab createTab;
+    @FXML
+    private Tab manageTab;
 
-    ///MANAGE TAB
-    @FXML public AnchorPane manageApn;
+    //MANAGE TAB (included)
+    //included fxml with id=manage on the main.fxml file
+    @FXML
+    private ManageController manageController;
+    //@FXML private Window manage
 
     //PLAY TAB
-@FXML
-public ComboBox<Group> playGroupsCmb;
-@FXML
-public TitledPane settingsPane;
-@FXML private Accordion settingsAcd;
+    @FXML
+    private ComboBox<Group> playGroupsCmb;
+    @FXML
+    private TitledPane settingsPane;
+    @FXML
+    private Accordion settingsAcd;
 
-//CREATE TAB
- @FXML public TextField newGroupTxt;
- @FXML public Button newGroupBtn;
- @FXML public ComboBox<Group> createGroupsCmb;
+    //CREATE TAB (included)
+    @FXML
+    private EntryController entryController;
+    @FXML
+    private GroupController groupController;
 
- @FXML public TextField newKanjiTxt;
- @FXML public TextField newHiraganaTxt;
- @FXML public TextField newRomajiTxt;
- @FXML public TextField newEnglishTxt;
- @FXML public Button newEntryBtn;
- @FXML public Button playBtn;
+     @FXML public Button playBtn;
 
+    private SettingsComponent settingsComponent;
+    @Autowired
+    private EntryService entryService;
+    @Autowired
+    private GroupService groupService;
 
-
-private SettingsComponent settingsComponent;
-private ManageTabComponent manageTabComponent;
-@Autowired private EntryService entryService;
-@Autowired private GroupService groupService;
-
- ObservableList<Group> groups = FXCollections.observableArrayList();
+ private ObservableList<Group> groups = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        loadGroups();
-        playGroupsCmb.setVisibleRowCount(6);
-        createGroupsCmb.setVisibleRowCount(6);
+        ////////////////////////////////////////////////////////
+        //get all groups from the db
+        groups.addAll(groupService.getGroups());
 
-        //set the accordion (settingsAcd) to expends the first and only accordion on startup
+        ////////////////////////////////////////////////////////
+        //configure the settings accordion to expends on startup
         settingsAcd.setExpandedPane(settingsPane);
 
-        //creating and setting the custom settings component
+        ////////////////////////////////////////////////////////
+        //create and configure the custom settings components
         settingsComponent = new SettingsComponent();
         settingsPane.setContent(settingsComponent);
 
-        //creating and setting the manager tab
-        manageTabComponent = new ManageTabComponent(entryService,groupService);
-        //AnchorPane.setLeftAnchor(manageTabComponent,0.0);
-        //AnchorPane.setRightAnchor(manageTabComponent,0.0);
-        manageApn.getChildren().add(manageTabComponent);
+        ////////////////////////////////////////////////////////
+        //setup play tab's combo boxes
+        ComboxBoxFactory.setComboxFactory(playGroupsCmb);
+        playGroupsCmb.setItems(groups);
+        playGroupsCmb.setVisibleRowCount(6);
 
-        //create new group
-        newGroupBtn.setOnAction(actionEvent -> {
-            createGroup();
-        });
+        ////////////////////////////////////////////////////////
+        //configure the included Entry creation component
+        entryController.setEntryService(entryService);
+        entryController.setGroups(groups);
 
-        //create new entry
-        newEntryBtn.setOnAction(actionEvent -> {
-            createEntry();
-        });
+        ////////////////////////////////////////////////////////
+        //configure the included Group creation component
+        groupController.setGroupService(groupService);
+        groupController.setGroups(groups);
 
-        //setup combo boxes
-        setupCombos(playGroupsCmb);
-        setupCombos(createGroupsCmb);
+        ////////////////////////////////////////////////////
+        //configure the included manageTab through its controller
+        manageController.setGroups(groups);
+        //ManageController was instantiated by FXML not SpringBoot,
+        //SpringBoot auto instantiation wouldn't work on ManageController
+        //hence these objects need to be passed explicitly
+        manageController.setGroupService(groupService);
+        manageController.setEntryService(entryService);
 
+        /////////////////////////////////////////////////////////
+        //configure the play button
         playBtn.setOnAction(actionEvent -> {
             Group currentGroup = playGroupsCmb.getSelectionModel().getSelectedItem();
             if(currentGroup == null){
@@ -118,80 +127,19 @@ private ManageTabComponent manageTabComponent;
             dialogComponent.play();
         });
 
-
-        //setup the tabs
-        ImageView playTabView = new ImageView(new Image("/images/play.png",true));
-        ImageView createTabView = new ImageView(new Image("/images/add.png",true));
-        ImageView manageTabView = new ImageView(new Image("/images/icon.png",true));
-        playTabView.setFitHeight(16);
-        playTabView.setFitWidth(16);createTabView.setFitHeight(16);
-        createTabView.setFitWidth(16);manageTabView.setFitHeight(16);
-        manageTabView.setFitWidth(16);
-
-
-        playTab.setGraphic(playTabView);
-        createTab.setGraphic(createTabView);
-        manageTab.setGraphic(manageTabView);
-
-    }
-
-
-
-    private void setupCombos(ComboBox<Group> comboBox) {
-        ComboxBoxFactory.setComboxFactory(comboBox);
-    }
-
-    private void loadGroups() {
-        //get all groups
-        groups.addAll(groupService.getGroups());
-        playGroupsCmb.setItems(groups);
-        createGroupsCmb.setItems(groups);
-    }
-    private void createGroup(){
-        String groupName = newGroupTxt.getText();
-        if(!groupName.isBlank()){
-            groupName = groupName.trim();
-        }else{
-            NotificationUtil.inputError("Please enter valid group name.");
-            return;
-        }
-        //check if group name already exists
-        if(groupService.existsByGroupName(groupName)){
-            NotificationUtil.inputError("Group already exists.");
-            return;
-        }
-        Group group = Group.builder().groupName(groupName).build();
-        group = groupService.save(group);
-        groups.add(group);
-        newGroupTxt.setText("");
-    }
-
-    private void createEntry() {
-        Group currentGroup = createGroupsCmb.getSelectionModel().getSelectedItem();
-        if(currentGroup == null){
-            NotificationUtil.inputError("Invalid Group Selection.");
-            return;
-        }
-        String kanji = newKanjiTxt.getText().trim();
-        String hiragana = newHiraganaTxt.getText().trim();
-        String romaji = newRomajiTxt.getText().trim();
-        String english = newEnglishTxt.getText().trim();
-        if((english.isBlank() || english.isEmpty()) || (kanji.isBlank() && hiragana.isBlank() && romaji.isBlank())){
-            NotificationUtil.inputError("Invalid or incomplete input. Note that English cannot be empty.");
-            return;
-        }
-        Entry entry = Entry.builder()
-                .kanji(kanji)
-                .hiragana(hiragana)
-                .romaji(romaji)
-                .english(english)
-                .group(currentGroup.getGroupName())
-                .build();
-        entryService.save(entry,currentGroup);
-        NotificationUtil.success("Entry successfully added.");
-        newKanjiTxt.setText("");
-        newEnglishTxt.setText("");
-        newRomajiTxt.setText("");
-        newHiraganaTxt.setText("");
+        ////////////////////////////////////////////////////////
+        //configure the tabs and tab images
+        ImageView playTabImageView = new ImageView(new Image("/images/play.png",true));
+        ImageView createTabImageView = new ImageView(new Image("/images/add.png",true));
+        ImageView manageTabImageView = new ImageView(new Image("/images/icon.png",true));
+        playTabImageView.setFitHeight(16);
+        playTabImageView.setFitWidth(16);
+        createTabImageView.setFitHeight(16);
+        createTabImageView.setFitWidth(16);
+        manageTabImageView.setFitHeight(16);
+        manageTabImageView.setFitWidth(16);
+        playTab.setGraphic(playTabImageView);
+        createTab.setGraphic(createTabImageView);
+        manageTab.setGraphic(manageTabImageView);
     }
 }

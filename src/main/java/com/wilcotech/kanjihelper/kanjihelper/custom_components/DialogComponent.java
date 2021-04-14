@@ -53,6 +53,7 @@ public class DialogComponent  {
             FXMLLoader loader = new FXMLLoader(ResourceUtils.getURL("classpath:slide.fxml"));
             loader.setController(slideController);
             Parent slideNode = loader.load();
+            slideNode.getStyleClass().add("mainbg");
             Scene scene = new Scene(slideNode,600,445);
             scene.getStylesheets().addAll(owner.getScene().getStylesheets());
             dialog = new Stage();

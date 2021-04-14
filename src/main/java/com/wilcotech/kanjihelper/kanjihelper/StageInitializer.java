@@ -15,6 +15,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ResourceUtils;
 
 /**
  * Created by Wilson
@@ -40,7 +41,7 @@ public class StageInitializer implements ApplicationListener<RoteHelperUIStarter
     public void onApplicationEvent(RoteHelperUIStarter.StageReadyEvent stageReadyEvent) {
 
         try{
-            FXMLLoader fxmlLoader = new FXMLLoader(mainResource.getURL());
+           FXMLLoader fxmlLoader = new FXMLLoader(mainResource.getURL());
             fxmlLoader.setController(mainController);
             Parent parent = fxmlLoader.load();
             parent.getStyleClass().add("mainbg");
@@ -57,6 +58,7 @@ public class StageInitializer implements ApplicationListener<RoteHelperUIStarter
             //mainStage.setWidth(width);
             //mainStage.setHeight(height);
             mainStage.setTitle(appTitle);
+            //mainStage.setResizable(false);
             mainStage.getIcons().add(new Image("/images/icon.png"));
             mainStage.centerOnScreen();
             mainStage.show();
