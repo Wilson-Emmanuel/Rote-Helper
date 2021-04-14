@@ -1,5 +1,5 @@
 .mainbg{
-    -fx-background-color: #BCD3E7;
+    -fx-background-color: #ecf3ff;
 }
 .button{
     -fx-background-color: #32527b;
@@ -7,6 +7,12 @@
 }
 .trans{
     -fx-background-color: transparent;
+}
+.trans:hover{
+    -fx-background-color: #ecf3ff;
+}
+#manageHbox{
+    -fx-background-color: #cccccc;
 }
 .whitebg{
     -fx-background-color: #ffffab;

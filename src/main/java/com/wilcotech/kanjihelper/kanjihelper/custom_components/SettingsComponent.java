@@ -29,7 +29,7 @@ public class SettingsComponent extends AnchorPane {
             this.getChildren().add(settingsNode);
 
             //set previously saved settings or save and get default settings
-            settingsController.setDefaults(getSavedSettings());
+            settingsController.displayDefaults(getSavedSettings());
         }catch (Exception ex){
             //ex.printStackTrace();
         }

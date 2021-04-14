@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minHeight="0.0" minWidth="0.0"  prefHeight="301.0" prefWidth="607.0" xmlns="http://javafx.com/javafx/16" fx:controller="com.wilcotech.kanjihelper.kanjihelper.controllers.EntryController" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="58.0" layoutY="99.0" text="Kanji">
+         <font>
+            <Font name="Arial Bold" size="12.0" />
+         </font></Label>
+      <TextField fx:id="newKanjiTxt" layoutX="132.0" layoutY="94.0" prefHeight="25.0" prefWidth="396.0" />
+      <Label layoutX="58.0" layoutY="136.0" text="Hiragana">
+         <font>
+            <Font name="Arial Bold" size="12.0" />
+         </font></Label>
+      <TextField fx:id="newHiraganaTxt" layoutX="132.0" layoutY="131.0" prefHeight="25.0" prefWidth="396.0" />
+      <TextField fx:id="newRomajiTxt" layoutX="132.0" layoutY="174.0" prefHeight="25.0" prefWidth="396.0" />
+      <Label layoutX="58.0" layoutY="178.0" text="Romaji">
+         <font>
+            <Font name="Arial Bold" size="12.0" />
+         </font></Label>
+      <TextField fx:id="newEnglishTxt" layoutX="132.0" layoutY="213.0" prefHeight="25.0" prefWidth="396.0" />
+      <Label layoutX="58.0" layoutY="217.0" text="English">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Button fx:id="newEntryBtn" layoutX="370.0" layoutY="250.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="158.0" text="Create Entry">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <ComboBox fx:id="createGroupsCmb" promptText="Select Group" layoutX="132.0" layoutY="46.0" prefHeight="25.0" prefWidth="396.0" />
+      <Button fx:id="clearEntryBtn" layoutX="132.0" layoutY="250.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="79.0" styleClass="cancel" text="Cancel">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
